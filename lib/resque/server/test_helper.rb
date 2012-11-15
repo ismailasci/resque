@@ -14,6 +14,13 @@ module Resque
           assert last_response.ok?, last_response.errors
         end
       end
+
+      def add_failed_jobs
+        Resque::Failure.create(:exception => Exception.new, :worker => Resque::Worker.new(:test), :queue => "queue", :payload => {'class' => 'GoodJob1'})
+        Resque::Failure.create(:exception => Exception.new, :worker => Resque::Worker.new(:test), :queue => "queue", :payload => {'class' => 'GoodJob1'})
+        Resque::Failure.create(:exception => Exception.new, :worker => Resque::Worker.new(:test), :queue => "queue", :payload => {'class' => 'GoodJob1'})
+        Resque::Failure.create(:exception => Exception.new, :worker => Resque::Worker.new(:test), :queue => "queue", :payload => {'class' => 'GoodJob1'})
+      end
     end
   end
 end
